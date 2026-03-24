@@ -1,70 +1,47 @@
 # 📊 Retail Sales Analysis: SQL + Tableau Performance Dashboard
 
-Este repositório apresenta um projeto de **Business Intelligence** ponta a ponta. A partir de um dataset bruto de varejo, realizei a modelagem de dados via SQL para construção de uma camada analítica, culminando em um dashboard executivo no Tableau para suporte à tomada de decisão.
+Este repositório apresenta um projeto de **Business Intelligence** ponta a ponta. A partir de um dataset bruto de varejo, realizei a modelagem de dados via SQL para construção de uma camada analítica, culminando em um dashboard executivo interativo no Tableau para suporte à tomada de decisão.
 
-## 🚀 Estrutura do Projeto
-
-A arquitetura foi desenhada para garantir reprodutibilidade e organização profissional:
-
-* **/sql_scripts**: Pipeline de dados contendo:
-  * `01_schema.sql`: DDL para criação da estrutura do banco e tipagem de dados.
-  * `02_view_tableau.sql`: Criação de Views para limpeza e regras de negócio (camada semântica).
-  * `03_business_queries.sql`: Consultas exploratórias para validação de KPIs.
-* **/tableau**: Arquivo de trabalho empacotado (`.twbx`) com o dashboard interativo.
-* **/docs**: Documentação visual e evidências do projeto.
-* **/outputs**: Resultados das análises exportados em CSV.
-
-## 📂 Fonte dos Dados
-
-Os dados foram obtidos através do **Kaggle** ([Retail Sales Dataset](https://www.kaggle.com/datasets/mohammadtalhasardar/retail-sales-dataset)).
-
-> **Nota:** Por se tratar de uma base de dados internacional, optei por manter as nomenclaturas originais (em inglês) na modelagem e no dashboard para preservar a integridade da fonte e demonstrar familiaridade com termos técnicos globais.
-
-## 🛠️ Tecnologias e Metodologias
-
-* **Banco de Dados:** PostgreSQL (Modelagem, Views, Window Functions).
-* **Visualização:** Tableau Desktop Professional (Design de Dashboards, KPIs e Storytelling).
-* **Versionamento:** Git & GitHub (Fluxo de trabalho e documentação).
-
-## 📈 Dashboard e Insights de Negócio
-
-O faturamento total analisado foi de **$456,000.00**, apresentando os seguintes comportamentos críticos:
+## 📈 Dashboard Executivo (Tableau)
+A visão final e interativa deste projeto está publicada e acessível na nuvem:
+👉 **[Acessar o Painel Interativo de Vendas](https://public.tableau.com/views/Retail_Sales_Performance_Analysis_v2/PerformancedeVendasnoVarejo2023?:language=pt-BR&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
 
 ![Dashboard Preview](./docs/dashboard_final.png)
 
-1.  **Sazonalidade:** Identificou-se um pico de vendas expressivo no mês de **Maio**, seguido por uma recuperação consistente no encerramento do ano.
-2.  **Mix de Categorias:** A categoria de **Electronics** lidera o faturamento, seguida de perto por *Clothing* e *Beauty*, indicando um portfólio de produtos equilibrado.
-3.  **Perfil Demográfico:** O público na faixa de **20-35 anos** representa a maior parcela do faturamento.
-    * *Insight:* Estratégias de marketing digital e fidelização devem ser priorizadas para este segmento, que demonstrou o maior LTV (Lifetime Value) potencial.
+## 💡 Insights e Recomendações de Negócio
 
-## 🏁 Guia de Execução (Como reproduzir este projeto)
+O faturamento total analisado foi de **$456.000,00**, com um ticket médio saudável de **$456,00** por transação. Através da exploração visual e em SQL, mapeamos as seguintes alavancas de negócio:
 
-Para rodar este projeto na sua máquina local, siga as etapas abaixo:
+1. **O Everest de Maio (Sazonalidade):** * *Diagnóstico:* O mês de Maio apresentou um pico de vendas anômalo ($53.150), muito acima da média anual, seguido de uma queda brusca no meio do ano.
+   * *Ação Recomendada:* Investigar junto ao time de Marketing quais campanhas rodaram em Maio (ex: Dia das Mães) e tentar replicar o modelo de aquisição para aquecer o Q3 (Julho a Setembro).
+2. **A Força dos Eletrônicos (Mix de Categorias):** * *Diagnóstico:* A categoria de **Eletrônicos** lidera a receita, mas é seguida de muito perto por Vestuário e Beleza.
+   * *Ação Recomendada:* Como não há um monopólio de um único produto, existe uma oportunidade de ouro para estratégias de *Cross-Sell* (ex: "Compre um smartphone e ganhe 15% em roupas e acessórios").
+3. **A Geração Z e Millennials (Perfil Demográfico):** * *Diagnóstico:* O público na faixa de **20 a 35 anos** representa a fatia esmagadora do faturamento da empresa.
+   * *Ação Recomendada:* Redirecionar a verba de tráfego pago para canais digitais de retenção forte para esse público (TikTok, Instagram) e criar programas de fidelidade (LTV) focados em tecnologia e moda.
 
-### 1. Pré-requisitos
-* **PostgreSQL** instalado.
-* Um cliente SQL (recomendado: **DBeaver**).
-* **Tableau Desktop** (para visualizar o arquivo `.twbx`).
+## 🚀 Estrutura do Projeto e Pipeline
 
-### 2. Configuração do Banco de Dados
-1.  Clone o repositório:
-    ```bash
-    git clone [https://github.com/Mpierredev/analise-vendas-sql.git](https://github.com/Mpierredev/analise-vendas-sql.git)
-    ```
-2.  Crie um banco de dados no PostgreSQL chamado `retail_db`.
-3.  Execute o script `./sql_scripts/01_schema.sql` para criar a tabela `retail_sales`.
+A arquitetura foi desenhada para garantir reprodutibilidade e organização profissional:
+* **/sql_scripts**: Pipeline de dados contendo:
+  * `01_schema.sql`: DDL para criação da estrutura do banco e tipagem de dados.
+  * `02_view_tableau.sql`: Criação da View `vw_dashboard_vendas` (Camada Semântica com regras de negócio).
+  * `03_business_queries.sql`: Consultas exploratórias avançadas para validação matemática.
+* **/outputs**: Base consolidada `dados_para_tableau.csv` consumida pelo dashboard.
+* **/docs**: Evidências visuais.
 
-### 3. Ingestão e Transformação
-1.  Importe o arquivo CSV do dataset para a tabela criada.
-    * *Configuração de Importação:* Delimitador `,` (vírgula) e Encoding `UTF-8`.
-2.  Execute o script `./sql_scripts/02_view_tableau.sql`.
-    * *Objetivo:* Isso criará a View `vw_dashboard_vendas`, que contém as regras de negócio e tratamento de idades.
-3.  (Opcional) Execute `./sql_scripts/03_business_queries.sql` para ver os dados brutos transformados em insights via SQL.
+> **Nota de Arquitetura:** A modelagem no PostgreSQL manteve os nomes originais em inglês (preservando a integridade do dataset global original), enquanto a camada de visualização (Front-end no Tableau) foi totalmente traduzida e adaptada para o usuário final em Português.
 
-### 4. Visualização
-1.  Navegue até a pasta `/tableau`.
-2.  Abra o arquivo `Retail_Sales_Performance_Analysis_v1.twbx`.
-3.  O dashboard abrirá com os dados já carregados (extrato) para interação imediata.
+## 📂 Fonte dos Dados
+
+Os dados brutos foram obtidos através do **Kaggle** ([Retail Sales Dataset](https://www.kaggle.com/datasets/mohammadtalhasardar/retail-sales-dataset)). Este dataset simula transações de varejo contendo informações demográficas de clientes, categorias de produtos e valores de compra.
+
+## 🏁 Guia de Execução Técnica
+
+Para reproduzir o back-end deste projeto na sua máquina local:
+1. Clone o repositório: `git clone https://github.com/Mpierredev/analise-vendas-sql.git`
+2. Crie um banco PostgreSQL chamado `retail_db`.
+3. Execute o script `01_schema.sql` e faça a ingestão do dataset localizado na pasta raiz.
+4. Rode `02_view_tableau.sql` para gerar a camada de visualização.
 
 ---
-*Projeto desenvolvido por Márcio Pierre para portfólio de Análise de Dados.*
+*Projeto desenvolvido por Márcio Pierre para portfólio de Data Analytics / B.I.*

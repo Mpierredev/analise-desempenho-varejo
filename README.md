@@ -4,7 +4,7 @@ Este repositório apresenta um projeto de **Business Intelligence** ponta a pont
 
 ## 📈 Dashboard Executivo (Tableau)
 A visão final e interativa deste projeto está publicada e acessível na nuvem:
-👉 **[Acessar o Painel Interativo de Vendas](https://public.tableau.com/views/Retail_Sales_Performance_Analysis_v2/PerformancedeVendasnoVarejo2023?:language=pt-BR&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
+👉 **[Acessar o Painel Interativo de Vendas](https://public.tableau.com/views/PerformancedeVendasnoVarejo2023/PerformancedeVendasnoVarejo2023?:language=pt-BR&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
 
 ![Dashboard Preview](./docs/dashboard_final.png)
 
